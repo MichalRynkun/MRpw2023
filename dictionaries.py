@@ -1,6 +1,7 @@
 data = {}
 
 while True:
+
     command = input("Pick an option: new_contact, show_contacts")
     if command == "new_contact":
         fal_name = input("Podaj imię i nazwisko:")
