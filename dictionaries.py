@@ -1,17 +1,38 @@
-data = {}
+import json
+from pathlib import Path
 
+path = Path("phones.json")
+
+if path.exists():
+    f = open(path, "r")
+    phones = json.load(f)
+    f.close()
+else:
+    phones = {}
+
+commands = [
+    "new_contact", "show_contacts"
+]
 while True:
+    command = input(f"Peek an option: {commands} ")
+    while command not in commands:
+        print("Unknown command, try again")
+        command = input(f"Peek an option: {commands} ")
 
-    command = input("Pick an option: new_contact, show_contacts")
     if command == "new_contact":
-        fal_name = input("Podaj imię i nazwisko:")
-        number = input("podaj numer telefonu:")
-        data[fal_name] = number
+        full_name = input("Input full name: ")
+        phone_num = input("Input phone number: ")
+        phones[full_name] = phone_num
     elif command == "show_contacts":
-        print(number)
-    # else:
-    #     print("Unknown command")
-    command = input("Do you want to continue Y/N?")
-    if command == "N":
-        break
+        print(phones)
 
+    answer = input("Do you want to continue Y/N? ")
+    while answer.lower() not in ["y", "n"]:
+        print("Choose Y or N only")
+        answer = input("Do you want to continue Y/N? ")
+
+    if answer.lower() == "n":
+        f = open("phones.json", "w")
+        json.dump(phones, f)
+        f.close()
+        break
