@@ -23,6 +23,7 @@ while True:
         full_name = input("Input full name: ")
         phone_num = input("Input phone number: ")
         phones[full_name] = phone_num
+        print(phones("hhh"))
     elif command == "show_contacts":
         print(phones)
 
